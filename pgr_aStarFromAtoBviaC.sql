@@ -1,4 +1,6 @@
 -- THE FOLLOWING PROCEDURAL FUNCTION WILL GIVE US THE LINE CONNECTING DESTINATION POINTS --
+-- The point procedural function is not necessary as starting and ending point will be shown in different colors --
+-- and the intermediate in different, so there shouldn't be any confusion --
 
 create or replace function pgr_aStarFromAtoBviaC_line(IN tbl character varying, 
 variadic double precision[],
@@ -76,6 +78,7 @@ begin
 				RETURN NEXT;
 			END IF;
 		END LOOP;	
+	-- Drop the temporary table, otherwise the next time you will run the query it will show that the matrix table already exists --
 	drop table matrix;
 	return;
 end;
@@ -87,4 +90,7 @@ language plpgsql volatile STRICT;
 -- SELECT cost FROM pgr_aStarFromAtoBviaC('ways', 28.231233, 41.324324, 29.432432, 42.423542, 30.234342, 43.234543, 28.443234, 42.454355) --
 -- etc etc --
 -- In GeoServer, we make an SQL View like the following --
--- SELECT geom FROM pgr_aStarFromAtoBviaC('ways', %x1%, %y1%, %x2%, %y2%) ORDER BY seq --
+-- SELECT geom FROM pgr_aStarFromAtoBviaC('ways', %variadicArray%) ORDER BY seq --
+-- and give the default values this 28.94603,41.00764,28.95402,41.01789,28.96145,41.00522,28.96650,41.01191 --
+-- But still have to figure out how to build a request from the OpenLayers3? --
+-- For time being, make different SQL Views for different possibilities (4pt, 5pt, 6pt etc)
