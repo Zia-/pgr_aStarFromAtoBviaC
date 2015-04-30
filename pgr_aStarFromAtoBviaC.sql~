@@ -3,7 +3,7 @@
 -- and the intermediate in different, so there shouldn't be any confusion --
 
 create or replace function pgr_aStarFromAtoBviaC_line(IN tbl character varying, 
-variadic anyarray,
+variadic double precision[],
 OUT seq integer, 
 OUT gid integer, 
 OUT name text,
@@ -86,11 +86,11 @@ $body$
 language plpgsql volatile STRICT;
 
 -- In order to use this function --
--- SELECT geom FROM pgr_aStarFromAtoBviaC('ways', 28.231233, 41.324324, 29.432432, 42.423542, 30.234342, 43.234543, 28.443234, 42.454355) --
--- SELECT cost FROM pgr_aStarFromAtoBviaC('ways', 28.231233, 41.324324, 29.432432, 42.423542, 30.234342, 43.234543, 28.443234, 42.454355) --
+-- SELECT geom FROM pgr_aStarFromAtoBviaC_line('ways', 28.231233, 41.324324, 29.432432, 42.423542, 30.234342, 43.234543, 28.443234, 42.454355) --
+-- SELECT cost FROM pgr_aStarFromAtoBviaC_line('ways', 28.231233, 41.324324, 29.432432, 42.423542, 30.234342, 43.234543, 28.443234, 42.454355) --
 -- etc etc --
 -- In GeoServer, we make an SQL View like the following --
--- SELECT geom FROM pgr_aStarFromAtoBviaC('ways', %variadicArray%) ORDER BY seq --
+-- SELECT geom FROM pgr_aStarFromAtoBviaC_line('ways', %variadicArray%) ORDER BY seq --
 -- and give the default values this 28.94603,41.00764,28.95402,41.01789,28.96145,41.00522,28.96650,41.01191 --
 -- But still have to figure out how to build a request from the OpenLayers3? --
 -- For time being, make different SQL Views for different possibilities (4pt, 5pt, 6pt etc)
