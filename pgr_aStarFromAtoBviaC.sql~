@@ -1,6 +1,7 @@
 -- THE FOLLOWING PROCEDURAL FUNCTION WILL GIVE US THE LINE CONNECTING DESTINATION POINTS --
 -- The point procedural function is not necessary as starting and ending point will be shown in different colors --
 -- and the intermediate in different, so there shouldn't be any confusion --
+-- Enter the variadic coordinates in the order "start", "via" etc etc, "end" --
 
 create or replace function pgr_aStarFromAtoBviaC_line(IN tbl character varying, 
 variadic double precision[],
@@ -86,6 +87,7 @@ $body$
 language plpgsql volatile STRICT;
 
 -- In order to use this function --
+-- Enter the variadic coordinates in the order "start", "via" etc etc, "end" --
 -- SELECT geom FROM pgr_aStarFromAtoBviaC_line('ways', 28.231233, 41.324324, 29.432432, 42.423542, 30.234342, 43.234543, 28.443234, 42.454355) --
 -- SELECT cost FROM pgr_aStarFromAtoBviaC_line('ways', 28.231233, 41.324324, 29.432432, 42.423542, 30.234342, 43.234543, 28.443234, 42.454355) --
 -- etc etc --
