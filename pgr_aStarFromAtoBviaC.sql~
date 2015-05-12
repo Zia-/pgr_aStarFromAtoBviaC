@@ -29,6 +29,7 @@ begin
 	-- We will create a temporary table which will hold all the required field values i.e. node_id, closest point's X coord, closest point's Y coord --
 	create temporary table matrix(id integer, node_id integer, x double precision, y double precision);
 	-- Array Length of above defined variadic function --
+	-- ($2, 1) means that the 2nd argument and the array is of dimension one --
 	arrayLengthHalf = (array_length($2,1))/2;
 	-- For Loop to feed our above declared table, index number 0 is nothing, means first array value is $2[1] --
 	For i in 1..arrayLengthHalf Loop

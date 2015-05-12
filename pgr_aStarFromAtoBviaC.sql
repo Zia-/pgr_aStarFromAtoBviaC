@@ -77,7 +77,6 @@ begin
 						RETURN NEXT;
 					End Loop;
 				source_var := target_var;
-				RETURN NEXT;
 			END IF;
 		END LOOP;	
 	-- Drop the temporary table, otherwise the next time you will run the query it will show that the matrix table already exists --
