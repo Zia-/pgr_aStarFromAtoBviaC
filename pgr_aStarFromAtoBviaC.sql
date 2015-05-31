@@ -82,13 +82,13 @@ begin
 	-- Drop the temporary table, otherwise the next time you will run the query it will show that the matrix table already exists --
 	drop table matrix;
 	return;
-
-	EXCEPTION
-		WHEN internal_error THEN
-			seq := seq +1 ;
+	
+	--EXCEPTION
+		--WHEN internal_error THEN
+			--seq := seq +1 ;
 			--gid := rec_astar.gid;
 			--name := rec_astar.name;
-			cost := 9999.9999;
+			--cost := 9999.9999;
 			--geom := rec_astar.the_geom;
 
 end;
